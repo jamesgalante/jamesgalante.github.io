@@ -29,6 +29,15 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: jekyllrb
 github_username:  jekyll
 
+title: "James Galante"
+email: jgalante@stanford.edu
+description: >-
+  Some random written things.
+baseurl: "/blog"          # <— IMPORTANT: sets your blog to live at /blog
+url: "https://jamesgalante.github.io" 
+twitter_username: JamesGalante8
+github_username: jamesgalante
+
 # Build settings
 theme: minima
 plugins:
