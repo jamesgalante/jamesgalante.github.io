@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-
-{% include head.html %}
-
-<!-- hack iOS CSS :active style -->
-<body ontouchstart="">
-
-    {% include nav.html %}
-    {% include search.html %}
-
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+</head>
+<body>
+  <header>
+    <h1><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
+    <nav>
+      <a href="{{ '/' | relative_url }}">Home</a>
+      <a href="{{ '/about/' | relative_url }}">About</a>
+      <a href="{{ '/projects/' | relative_url }}">Projects</a>
+    </nav>
+  </header>
+  
+  <main>
     {{ content }}
-
-    {% include footer.html %}
-
-
-<!-- Image to hack wechat -->
-<img src="/img/icon_wechat.png" width="0" height="0" />
-<!-- Migrate from head to bottom, no longer block render and still work -->
-
+  </main>
+  
+  <footer>
+    <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}</p>
+  </footer>
 </body>
-
 </html>

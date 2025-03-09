@@ -1,60 +1,8 @@
-# -----------------------------------------
-# SITE SETTINGS (Your original data + Hux extras)
-# -----------------------------------------
-title: "James Galante"            
-SEOTitle: "James Galante Blog"    
-header-img: "img/home-bg.jpg"     
-email: jgalante@stanford.edu
-description: >-
-  Some random written things. 
-keyword: "James, Blog, Projects"
+title: James Galante
+description: Personal site of James Galante
 url: "https://jamesgalante.github.io"
 baseurl: ""
-future: true
-permalink: pretty
-paginate: 10
-
-# SNS settings
-# (Removed weibo_username & zhihu_username)
-github_username: jamesgalante
-twitter_username: JamesGalante8
-# linkedin_username:
+permalink: /:title/
 
 # Build settings
-highlighter: rouge
-anchorjs: true
 markdown: kramdown
-kramdown:
-  input: GFM
-  syntax_highlighter_opts:
-    span:
-      line_numbers: false
-    block:
-      line_numbers: true
-      start_line: 1
-
-plugins:
-  - jekyll-feed
-  - jekyll-paginate
-
-exclude:
-  - less
-  - node_modules
-  - Gruntfile.js
-  - package.json
-  - README.md
-  - README.zh.md
-
-# Sidebar settings
-sidebar: true
-sidebar-about-description: "Hi, I'm James Galante. This is my blog."
-sidebar-avatar: "https://github.com/jamesgalante.png"
-
-# Progressive Web Apps
-chrome-tab-theme-color: "#000000"
-service-worker: true
-
-# Others
-page-mathjax: false
-friends:
-  - { title: "Example Friend", href: "https://example.com" }

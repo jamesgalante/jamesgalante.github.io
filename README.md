@@ -1,1 +1,0 @@
-# jamesgalante.github.io
