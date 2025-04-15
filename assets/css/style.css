@@ -290,7 +290,8 @@ th {
   pointer-events: auto;
   background-color: var(--leaf-color-1);
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
+  transition: all 0.5s ease;
+  z-index: -5;
 }
 
 .leaf1 {
@@ -343,33 +344,104 @@ th {
   background: linear-gradient(135deg, var(--leaf-color-1), var(--leaf-color-2));
 }
 
+.leaf6 {
+  right: 15%;
+  top: 45%;
+  width: 35px;
+  height: 55px;
+  border-radius: 35px 15px 35px 0;
+  transform: rotate(-60deg);
+  background: linear-gradient(135deg, var(--leaf-color-2), var(--leaf-color-1));
+}
+
+.leaf7 {
+  left: 12%;
+  top: 35%;
+  width: 30px;
+  height: 50px;
+  border-radius: 30px 10px 30px 0;
+  transform: rotate(15deg);
+  background: linear-gradient(135deg, var(--leaf-color-1), var(--leaf-color-2));
+}
+
+/* Leaf hover effect - creates wind animation pattern */
+.home-elements:hover .leaf {
+  animation: leafWind 8s infinite ease-in-out;
+}
+
+.leaf1:hover, .leaf3:hover, .leaf5:hover, .leaf7:hover {
+  animation: leafWindRight 8s infinite ease-in-out !important;
+}
+
+.leaf2:hover, .leaf4:hover, .leaf6:hover {
+  animation: leafWindLeft 8s infinite ease-in-out !important;
+}
+
+@keyframes leafWind {
+  0% { transform: translateY(0) rotate(var(--rotate, 0deg)); }
+  25% { transform: translateY(-20px) translateX(15px) rotate(calc(var(--rotate, 0deg) + 15deg)); }
+  50% { transform: translateY(0) translateX(30px) rotate(calc(var(--rotate, 0deg) - 5deg)); }
+  75% { transform: translateY(20px) translateX(15px) rotate(calc(var(--rotate, 0deg) + 10deg)); }
+  100% { transform: translateY(0) rotate(var(--rotate, 0deg)); }
+}
+
+@keyframes leafWindRight {
+  0% { transform: translateY(0) translateX(0) rotate(var(--rotate, 0deg)); }
+  25% { transform: translateY(-30px) translateX(60px) rotate(calc(var(--rotate, 0deg) + 20deg)); }
+  50% { transform: translateY(10px) translateX(100px) rotate(calc(var(--rotate, 0deg) - 10deg)); }
+  75% { transform: translateY(20px) translateX(60px) rotate(calc(var(--rotate, 0deg) + 15deg)); }
+  100% { transform: translateY(0) translateX(0) rotate(var(--rotate, 0deg)); }
+}
+
+@keyframes leafWindLeft {
+  0% { transform: translateY(0) translateX(0) rotate(var(--rotate, 0deg)); }
+  25% { transform: translateY(-20px) translateX(-60px) rotate(calc(var(--rotate, 0deg) - 20deg)); }
+  50% { transform: translateY(15px) translateX(-100px) rotate(calc(var(--rotate, 0deg) + 10deg)); }
+  75% { transform: translateY(25px) translateX(-60px) rotate(calc(var(--rotate, 0deg) - 15deg)); }
+  100% { transform: translateY(0) translateX(0) rotate(var(--rotate, 0deg)); }
+}
+
 /* About Page - Graph Elements */
+.about-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
 .graph-line {
   position: absolute;
   height: 2px;
-  background: linear-gradient(to right, transparent, var(--graph-color-1), transparent);
+  background: linear-gradient(to right, transparent, var(--graph-color-1) 15%, transparent 30%, transparent 70%, var(--graph-color-1) 85%, transparent);
   transform-origin: left center;
+  z-index: -5;
 }
 
 .line1 {
-  top: 30%;
-  left: 0;
+  top: 20%;
   width: 100%;
-  transform: rotate(-2deg);
+  left: 0;
 }
 
 .line2 {
-  top: 50%;
-  left: 0;
+  top: 40%;
   width: 100%;
-  transform: rotate(1deg);
+  left: 0;
 }
 
 .line3 {
-  top: 70%;
-  left: 0;
+  top: 60%;
   width: 100%;
-  transform: rotate(-1deg);
+  left: 0;
+}
+
+.line4 {
+  top: 80%;
+  width: 100%;
+  left: 0;
 }
 
 .graph-dot {
@@ -380,52 +452,254 @@ th {
   background-color: var(--graph-color-2);
   box-shadow: 0 0 8px rgba(82, 114, 168, 0.6);
   pointer-events: auto;
+  z-index: -4;
+  transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
+/* Left side dots */
 .dot1 {
-  left: 20%;
-  top: calc(30% - 6px);
+  left: 5%;
+  top: 20%;
 }
 
 .dot2 {
-  left: 60%;
-  top: calc(50% - 6px);
+  left: 8%;
+  top: 40%;
 }
 
 .dot3 {
-  left: 40%;
-  top: calc(70% - 6px);
+  left: 4%;
+  top: 60%;
+}
+
+.dot4 {
+  left: 7%;
+  top: 80%;
+}
+
+/* Right side dots */
+.dot5 {
+  right: 5%;
+  top: 20%;
+}
+
+.dot6 {
+  right: 8%;
+  top: 40%;
+}
+
+.dot7 {
+  right: 4%;
+  top: 60%;
+}
+
+.dot8 {
+  right: 7%;
+  top: 80%;
+}
+
+.graph-dot:hover {
+  transform: scale(2);
+  background-color: var(--accent-color);
+  z-index: 10;
+}
+
+/* Connection lines that appear on hover */
+.about-elements:hover .connection {
+  opacity: 1;
+}
+
+.connection {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(to right, var(--graph-color-2), var(--accent-color));
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: -5;
+  transform-origin: left center;
+}
+
+.connection1 {
+  width: 10%;
+  left: 5%;
+  top: 20%;
+  transform: rotate(45deg);
+}
+
+.connection2 {
+  width: 10%;
+  right: 5%;
+  top: 40%;
+  transform: rotate(-45deg);
+}
+
+.connection3 {
+  width: 10%;
+  left: 5%;
+  bottom: 30%;
+  transform: rotate(-30deg);
+}
+
+.connection4 {
+  width: 10%;
+  right: 8%;
+  bottom: 20%;
+  transform: rotate(30deg);
 }
 
 /* Projects Page - Fluid Elements */
+.projects-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
 .fluid-blob {
   position: absolute;
   pointer-events: auto;
   background: linear-gradient(135deg, var(--fluid-color-1), var(--fluid-color-2));
   border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  opacity: 0.8;
+  opacity: 0.6;
+  z-index: -5;
+  transition: all 0.6s ease;
 }
 
+/* Left side blobs */
 .blob1 {
   left: 5%;
-  top: 20%;
-  width: 120px;
-  height: 120px;
+  top: 10%;
+  width: 80px;
+  height: 80px;
 }
 
 .blob2 {
-  right: 8%;
-  top: 40%;
-  width: 150px;
-  height: 150px;
+  left: 8%;
+  top: 30%;
+  width: 60px;
+  height: 60px;
 }
 
 .blob3 {
-  left: 12%;
-  bottom: 15%;
-  width: 100px;
-  height: 100px;
+  left: 3%;
+  top: 50%;
+  width: 90px;
+  height: 90px;
+}
+
+.blob4 {
+  left: 7%;
+  top: 70%;
+  width: 70px;
+  height: 70px;
+}
+
+.blob5 {
+  left: 4%;
+  top: 90%;
+  width: 65px;
+  height: 65px;
+}
+
+/* Right side blobs */
+.blob6 {
+  right: 5%;
+  top: 10%;
+  width: 70px;
+  height: 70px;
+}
+
+.blob7 {
+  right: 8%;
+  top: 30%;
+  width: 85px;
+  height: 85px;
+}
+
+.blob8 {
+  right: 3%;
+  top: 50%;
+  width: 65px;
+  height: 65px;
+}
+
+.blob9 {
+  right: 7%;
+  top: 70%;
+  width: 90px;
+  height: 90px;
+}
+
+.blob10 {
+  right: 4%;
+  top: 90%;
+  width: 75px;
+  height: 75px;
+}
+
+.fluid-blob:hover {
+  transform: scale(1.2) translate(10px, 10px);
+  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  opacity: 0.8;
+  background: linear-gradient(135deg, var(--accent-color), var(--fluid-color-2));
+}
+
+/* Diagonal flow animation on hover */
+.projects-elements:hover .fluid-blob {
+  animation: flowDiagonal 10s infinite alternate ease-in-out;
+}
+
+.projects-elements:hover .blob1,
+.projects-elements:hover .blob3,
+.projects-elements:hover .blob5,
+.projects-elements:hover .blob7,
+.projects-elements:hover .blob9 {
+  animation-delay: 0s;
+}
+
+.projects-elements:hover .blob2,
+.projects-elements:hover .blob4,
+.projects-elements:hover .blob6,
+.projects-elements:hover .blob8,
+.projects-elements:hover .blob10 {
+  animation-delay: 2s;
+}
+
+@keyframes flowDiagonal {
+  0% {
+    transform: translateX(0) translateY(0);
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    background: linear-gradient(135deg, var(--fluid-color-1), var(--fluid-color-2));
+  }
+  20% {
+    transform: translateX(20px) translateY(20px);
+    border-radius: 30% 70% 40% 60% / 50% 40% 60% 50%;
+    background: linear-gradient(135deg, var(--fluid-color-1), var(--accent-color));
+  }
+  40% {
+    transform: translateX(40px) translateY(40px);
+    border-radius: 50% 50% 50% 50% / 40% 60% 40% 60%;
+    background: linear-gradient(135deg, var(--accent-color), var(--fluid-color-2));
+  }
+  60% {
+    transform: translateX(60px) translateY(60px);
+    border-radius: 40% 60% 30% 70% / 60% 40% 50% 40%;
+    background: linear-gradient(135deg, var(--fluid-color-2), var(--link-color));
+  }
+  80% {
+    transform: translateX(40px) translateY(40px);
+    border-radius: 70% 30% 60% 40% / 40% 70% 30% 60%;
+    background: linear-gradient(135deg, var(--link-color), var(--fluid-color-1));
+  }
+  100% {
+    transform: translateX(20px) translateY(20px);
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    background: linear-gradient(135deg, var(--fluid-color-1), var(--fluid-color-2));
+  }
 }
 
 /* Adjust for side decorations */
