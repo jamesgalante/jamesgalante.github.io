@@ -5,8 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
 </head>
 <body>
+  <div class="decorative-container">
+    <div class="decorative-elements home-elements">
+      <!-- Leaf elements for homepage -->
+      <div class="leaf leaf1"></div>
+      <div class="leaf leaf2"></div>
+      <div class="leaf leaf3"></div>
+      <div class="leaf leaf4"></div>
+      <div class="leaf leaf5"></div>
+    </div>
+    
+    <div class="decorative-elements about-elements">
+      <!-- Graph elements for about page -->
+      <div class="graph-line line1"></div>
+      <div class="graph-line line2"></div>
+      <div class="graph-line line3"></div>
+      <div class="graph-dot dot1"></div>
+      <div class="graph-dot dot2"></div>
+      <div class="graph-dot dot3"></div>
+    </div>
+    
+    <div class="decorative-elements projects-elements">
+      <!-- Fluid elements for projects page -->
+      <div class="fluid-blob blob1"></div>
+      <div class="fluid-blob blob2"></div>
+      <div class="fluid-blob blob3"></div>
+    </div>
+  </div>
+  
   <header>
     <h1><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
     <nav>
@@ -23,5 +52,124 @@
   <footer>
     <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}</p>
   </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Determine which page we're on
+      const path = window.location.pathname;
+      let pageType = 'home';
+      
+      if (path.includes('/about/')) {
+        pageType = 'about';
+      } else if (path.includes('/projects/')) {
+        pageType = 'projects';
+      }
+      
+      // Show the appropriate decorative elements
+      document.querySelectorAll('.decorative-elements').forEach(el => {
+        el.style.display = 'none';
+      });
+      
+      document.querySelector(`.${pageType}-elements`).style.display = 'block';
+      
+      // Animate elements in
+      if (pageType === 'home') {
+        animateLeaves();
+      } else if (pageType === 'about') {
+        animateGraphs();
+      } else if (pageType === 'projects') {
+        animateFluid();
+      }
+    });
+    
+    function animateLeaves() {
+      gsap.from('.leaf', {
+        opacity: 0,
+        x: -50,
+        stagger: 0.1,
+        duration: 1,
+        ease: "power2.out"
+      });
+      
+      // Add hover effect
+      document.querySelectorAll('.leaf').forEach(leaf => {
+        leaf.addEventListener('mouseover', function() {
+          gsap.to(this, {
+            rotation: "+=15",
+            scale: 1.1,
+            duration: 0.3
+          });
+        });
+        
+        leaf.addEventListener('mouseout', function() {
+          gsap.to(this, {
+            rotation: "-=15",
+            scale: 1,
+            duration: 0.3
+          });
+        });
+      });
+    }
+    
+    function animateGraphs() {
+      gsap.from('.graph-line', {
+        scaleX: 0,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power1.out"
+      });
+      
+      gsap.from('.graph-dot', {
+        scale: 0,
+        duration: 0.5,
+        delay: 0.8,
+        stagger: 0.2
+      });
+      
+      // Add hover effect
+      document.querySelectorAll('.graph-dot').forEach(dot => {
+        dot.addEventListener('mouseover', function() {
+          gsap.to(this, {
+            scale: 1.5,
+            duration: 0.3
+          });
+        });
+        
+        dot.addEventListener('mouseout', function() {
+          gsap.to(this, {
+            scale: 1,
+            duration: 0.3
+          });
+        });
+      });
+    }
+    
+    function animateFluid() {
+      gsap.from('.fluid-blob', {
+        scale: 0,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.3,
+        ease: "elastic.out(1, 0.3)"
+      });
+      
+      // Add hover effects
+      document.querySelectorAll('.fluid-blob').forEach(blob => {
+        blob.addEventListener('mouseover', function() {
+          gsap.to(this, {
+            borderRadius: "40% 60% 70% 30% / 40% 50% 60% 50%",
+            duration: 0.6
+          });
+        });
+        
+        blob.addEventListener('mouseout', function() {
+          gsap.to(this, {
+            borderRadius: "60% 40% 30% 70% / 60% 30% 70% 40%",
+            duration: 0.6
+          });
+        });
+      });
+    }
+  </script>
 </body>
 </html>
